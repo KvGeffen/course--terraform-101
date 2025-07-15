@@ -1,13 +1,16 @@
 variable "application_name" {
   description = "The name of the application"
   type        = string
-}
 
+  validation {
+    condition     = length(var.application_name) < 12
+    error_message = "Application name must be less than 12 characters."
+  }
+}
 variable "environment_name" {
   description = "The name of the environment"
   type        = string
 }
-
 variable "api_key" {
   description = "The API key"
   type        = string
@@ -16,6 +19,15 @@ variable "api_key" {
 variable "instance_count" {
   description = "The number of instances to create"
   type        = number
+
+  validation {
+    condition = (
+      var.instance_count >= local.min_nodes &&
+      var.instance_count < local.max_nodes &&
+      var.instance_count % 2 != 0
+    )
+    error_message = "Instance count must be an odd number between 5 and 10."
+  }
 }
 
 variable "enabled" {

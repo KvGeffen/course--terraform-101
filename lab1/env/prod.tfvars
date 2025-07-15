@@ -1,5 +1,5 @@
 environment_name = "prod"
-instance_count   = 3
+instance_count   = 7
 enabled          = false
 regions          = ["us-west-1", "us-east-1"]
 region_instance_count = {
