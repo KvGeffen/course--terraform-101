@@ -37,3 +37,13 @@ resource "random_string" "if" {
   upper   = false
   special = false
 }
+
+module "alpha" {
+  source  = "hashicorp/module/random"
+  version = "1.0.0"
+}
+
+module "beta" {
+  source  = "hashicorp/module/random"
+  version = "1.0.0"
+}
