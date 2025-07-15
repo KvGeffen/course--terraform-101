@@ -29,3 +29,7 @@ output "alpha" {
 output "beta" {
   value = module.beta.random_string
 }
+output "gamma" {
+  value = module.gamma.random_string
+
+}

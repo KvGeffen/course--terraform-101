@@ -47,3 +47,10 @@ module "beta" {
   source  = "hashicorp/module/random"
   version = "1.0.0"
 }
+
+module "gamma" {
+  source = "./modules/rando"
+
+  length = 8
+}
+
