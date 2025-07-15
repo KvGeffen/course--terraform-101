@@ -14,3 +14,9 @@ output "api_key" {
   value     = var.api_key
   sensitive = true
 }
+output "primary_region" {
+  value = var.regions[0]
+}
+output "primary_region_instance_count" {
+  value = var.region_instance_count[var.regions[1]]
+}
