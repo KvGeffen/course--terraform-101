@@ -23,3 +23,9 @@ output "primary_region_instance_count" {
 output "kind" {
   value = var.sku_settings.kind
 }
+output "regionA" {
+  value = module.regional_stamps[0].name
+}
+output "regionB" {
+  value = module.regional_stamps[1].name
+}
