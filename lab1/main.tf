@@ -11,46 +11,18 @@ locals {
   max_nodes          = 10
 }
 
-resource "random_string" "list" {
-  count = length(var.regions)
-
-  length  = 6
-  upper   = false
-  special = false
-
+module "regionA" {
+  source         = "./modules/regional-stamp"
+  region         = var.regions[0]
+  name           = "foo"
+  min_node_count = 4
+  max_node_count = 8
 }
 
-resource "random_string" "map" {
-
-  for_each = var.region_instance_count
-
-  length  = 6
-  upper   = false
-  special = false
+module "regionB" {
+  source         = "./modules/regional-stamp"
+  region         = var.regions[1]
+  name           = "bar"
+  min_node_count = 4
+  max_node_count = 8
 }
-
-resource "random_string" "if" {
-
-  count = var.enabled ? 1 : 0
-
-  length  = 6
-  upper   = false
-  special = false
-}
-
-module "alpha" {
-  source  = "hashicorp/module/random"
-  version = "1.0.0"
-}
-
-module "beta" {
-  source  = "hashicorp/module/random"
-  version = "1.0.0"
-}
-
-module "gamma" {
-  source = "./modules/rando"
-
-  length = 8
-}
-
