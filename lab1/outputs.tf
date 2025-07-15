@@ -20,3 +20,6 @@ output "primary_region" {
 output "primary_region_instance_count" {
   value = var.region_instance_count[var.regions[1]]
 }
+output "kind" {
+  value = var.sku_settings.kind
+}
