@@ -1,1 +1,0 @@
-# course--terraform-101
