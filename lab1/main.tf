@@ -28,3 +28,12 @@ resource "random_string" "map" {
   upper   = false
   special = false
 }
+
+resource "random_string" "if" {
+
+  count = var.enabled ? 1 : 0
+
+  length  = 6
+  upper   = false
+  special = false
+}
