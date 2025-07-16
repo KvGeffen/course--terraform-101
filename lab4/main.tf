@@ -17,5 +17,12 @@ resource "azurerm_key_vault" "main" {
   resource_group_name = azurerm_resource_group.main.name
   sku_name            = "standard"
   tenant_id           = data.azurerm_client_config.current.tenant_id
+
+  enable_rbac_authorization = true
 }
 
+resource "azurerm_role_assignment" "terraform_user" {
+  scope                = azurerm_key_vault.main.id
+  principal_id         = data.azurerm_client_config.current.object_id
+  role_definition_name = "Key Vault Administrator"
+}

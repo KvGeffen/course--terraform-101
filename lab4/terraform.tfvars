@@ -1,2 +1,2 @@
-application_name = "devops"
+# application_name = "devops"
 primary_location = "westeurope"
