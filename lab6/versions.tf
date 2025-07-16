@@ -28,5 +28,10 @@ provider "tls" {
 
 provider "azurerm" {
   #   subscription_id = "c59cb858-b5c2-4699-8eb2-398034c73ab0"te
-  features {}
+  features {
+    key_vault {
+      purge_soft_delete_on_destroy = true
+      recover_soft_deleted_secrets = true
+    }
+  }
 }
