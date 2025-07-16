@@ -46,6 +46,8 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     azurerm_network_interface.vm1.id
   ]
 
+  patch_assessment_mode = "ImageDefault"
+
   admin_ssh_key {
     username   = "adminuser"
     public_key = tls_private_key.vm1.public_key_openssh
@@ -62,5 +64,17 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     sku       = "22_04-lts-gen2"
     version   = "latest"
   }
+
+
 }
 
+resource "local_file" "private_key" {
+  content         = tls_private_key.vm1.private_key_pem
+  filename        = pathexpand("~/.ssh/vm1")
+  file_permission = "0600"
+}
+
+resource "local_file" "public_key" {
+  content  = tls_private_key.vm1.public_key_openssh
+  filename = pathexpand("~/.ssh/vm1.pub")
+}
