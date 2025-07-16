@@ -12,10 +12,10 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "kvg-rg-tf101-dev"
-    storage_account_name = "kvgst8v3zjd4om8001"
-    container_name       = "tfstate"
-    key                  = "observability-dev"
+    #     resource_group_name  = "kvg-rg-tf101-dev"
+    #     storage_account_name = "kvgst8v3zjd4om8001"
+    #     container_name       = "tfstate"
+    #     key                  = "observability-dev"
   }
 }
 
