@@ -50,3 +50,48 @@ resource "azurerm_subnet" "delta" {
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = [local.delta_address_space]
 }
+
+
+
+resource "azurerm_network_security_group" "remote_access" {
+  name                = "kvg-nsg-${var.application_name}-${var.environment_name}-remote-access"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+
+  security_rule {
+    name                       = "ssh"
+    priority                   = 1000
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_ranges    = ["22"]
+    source_address_prefix      = chomp(jsondecode(data.http.ip.response_body).ip)
+    destination_address_prefix = "*"
+  }
+
+}
+
+resource "azurerm_subnet_network_security_group_association" "alpha" {
+  subnet_id                 = azurerm_subnet.alpha.id
+  network_security_group_id = azurerm_network_security_group.remote_access.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "beta" {
+  subnet_id                 = azurerm_subnet.beta.id
+  network_security_group_id = azurerm_network_security_group.remote_access.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "gamma" {
+  subnet_id                 = azurerm_subnet.gamma.id
+  network_security_group_id = azurerm_network_security_group.remote_access.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "delta" {
+  subnet_id                 = azurerm_subnet.delta.id
+  network_security_group_id = azurerm_network_security_group.remote_access.id
+}
+
+data "http" "ip" {
+  url = "https://api.ipify.org?format=json"
+}
