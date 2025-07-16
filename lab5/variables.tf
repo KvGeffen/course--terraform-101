@@ -11,3 +11,7 @@ variable "primary_location" {
   type        = string
 
 }
+variable "base_address_space" {
+  description = "The base address space for the virtual network"
+  type        = string
+}
