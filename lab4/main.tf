@@ -26,3 +26,23 @@ resource "azurerm_role_assignment" "terraform_user" {
   principal_id         = data.azurerm_client_config.current.object_id
   role_definition_name = "Key Vault Administrator"
 }
+
+data "azurerm_log_analytics_workspace" "observability" {
+  name                = "kvg-law-obesrvability-${var.environment_name}"
+  resource_group_name = "kvg-rg-obesrvability-${var.environment_name}"
+}
+
+resource "azurerm_monitor_diagnostic_setting" "main" {
+  name               = "${var.application_name}-${var.environment_name}-${random_string.keyvault_suffic.result}"
+  target_resource_id = azurerm_key_vault.main.id
+
+  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.observability.id
+
+  enabled_log {
+    category = "AuditEvent"
+  }
+
+  enabled_metric {
+    category = "AllMetrics"
+  }
+}
