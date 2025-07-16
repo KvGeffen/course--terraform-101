@@ -9,14 +9,21 @@ terraform {
       source  = "hashicorp/random"
       version = "=3.7.2"
     }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "4.1.0"
+    }
   }
-
   backend "azurerm" {
     #   resource_group_name  = "kvg-rg-tf101-dev"
     #   storage_account_name = "kvgst8v3zjd4om8001"
     #   container_name       = "tfstate"
     #   key                  = "devops-dev"
   }
+}
+
+provider "tls" {
+  # Configuration options
 }
 
 provider "azurerm" {
