@@ -2,12 +2,12 @@
 export ARM_SUBSCRIPTION_ID="c59cb858-b5c2-4699-8eb2-398034c73ab0"
 
 # set the application / environment 
-export TF_VAR_application_name="network"
-export TF_VAR_environment_name="dev"
+export TF_VAR_application_name="azapi"
+export TF_VAR_environment_name="prod"
 
 # set the backend
-export BACKEND_RESOURCE_GROUP_NAME="kvg-rg-tf101-dev"
-export BACKEND_STORAGE_ACCOUNT_NAME="kvgst8v3zjd4om8001"
+export BACKEND_RESOURCE_GROUP_NAME="kvg-rg-tf101-prod"
+export BACKEND_STORAGE_ACCOUNT_NAME="kvgst0up67i1av5001"
 export BACKEND_CONTAINER_NAME="tfstate"
 export BACKEND_KEY=$TF_VAR_application_name-$TF_VAR_environment_name
 
@@ -19,5 +19,4 @@ terraform init \
     -backend-config="key=${BACKEND_KEY}"
 
 terraform $* -var-file ./env/$TF_VAR_environment_name.tfvars
-
 rm -rf .terraform

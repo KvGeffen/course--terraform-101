@@ -18,6 +18,6 @@ terraform init \
     -backend-config="container_name=${BACKEND_CONTAINER_NAME}" \
     -backend-config="key=${BACKEND_KEY}"
 
-terraform $*
+terraform $* -var-file ./env/$TF_VAR_environment_name.tfvars
 
 rm -rf .terraform

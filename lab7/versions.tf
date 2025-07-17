@@ -1,18 +1,18 @@
 
 terraform {
   required_providers {
+    azapi = {
+      source  = "Azure/azapi"
+      version = "2.5.0"
+    }
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "=4.36.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "=3.7.2"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "4.1.0"
-    }
+    # random = {
+    #   source  = "hashicorp/random"
+    #   version = "=3.7.2"
+    # }
   }
   backend "azurerm" {
     #   resource_group_name  = "kvg-rg-tf101-dev"
@@ -22,7 +22,8 @@ terraform {
   }
 }
 
-provider "tls" {
+
+provider "azapi" {
   # Configuration options
 }
 
