@@ -60,14 +60,14 @@ resource "azurerm_public_ip" "bastion" {
   sku                 = "Standard"
 }
 
-resource "azurerm_bastion_host" "main" {
-  name                = "kvg-bas-${var.application_name}-${var.environment_name}"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+# resource "azurerm_bastion_host" "main" {
+#   name                = "kvg-bas-${var.application_name}-${var.environment_name}"
+#   location            = azurerm_resource_group.main.location
+#   resource_group_name = azurerm_resource_group.main.name
 
-  ip_configuration {
-    name                 = "configuration"
-    subnet_id            = azurerm_subnet.bastion.id
-    public_ip_address_id = azurerm_public_ip.bastion.id
-  }
-}
+#   ip_configuration {
+#     name                 = "configuration"
+#     subnet_id            = azurerm_subnet.bastion.id
+#     public_ip_address_id = azurerm_public_ip.bastion.id
+#   }
+# }
